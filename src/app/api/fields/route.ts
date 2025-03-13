@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/utils/mongoose";
-import Field from "@/models/Field"
+import { dbConnect } from "@/src/utils/mongoose";
+import Field from "@/src/models/Field"
 
 export async function GET(){
     dbConnect();
