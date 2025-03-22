@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
-import { dbConnect } from "@/utils/mongoose";
+import { connectDB } from "@/utils/mongoose";
 
 export async function POST(request: Request) {
   const { username, email, password } = await request.json();
 
   try {
-    await dbConnect();
+    await connectDB();
     const userFound = await User.findOne({ email });
 
     if (userFound) {
@@ -30,15 +30,15 @@ export async function POST(request: Request) {
     const savedUser = await user.save();
 
     return NextResponse.json({
-        email:savedUser.email,
-        username:savedUser.username,
-        id:savedUser._id
+      email: savedUser.email,
+      username: savedUser.username,
+      id: savedUser._id,
     });
   } catch (error) {
     console.log(error);
-    
-    if(error instanceof Error){
-        return NextResponse.json({message:error.message},{status:400})
+
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 400 });
     }
   }
 }
