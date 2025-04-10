@@ -1,12 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import User from "@/models/User";
+import { RegisterUserSchemaType } from "@/types/Schemas/auth.types";
 import { connectDB } from "@/utils/mongoose";
+import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function register({
+  email,
+  username,
+  password,
+}: RegisterUserSchemaType) {
   try {
-    const { username, email, password } = await request.json();
-
     await connectDB();
     const userFound = await User.findOne({ email });
 

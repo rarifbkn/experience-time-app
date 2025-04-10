@@ -7,6 +7,13 @@ const uri = process.env.MONGODB_URI;
 
 const connectDB = async () => {
   try {
+    //connection exist?
+    if (mongoose.connection.readyState === 1) {
+      console.log("MongoDB ya conectado");
+      return Promise.resolve(true);
+    }
+
+    //create connection otherwise
     const { connection } = await mongoose.connect(uri);
 
     if (connection.readyState === 1) {
