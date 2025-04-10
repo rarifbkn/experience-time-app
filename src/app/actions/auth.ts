@@ -1,6 +1,9 @@
 "use server";
 import User from "@/models/User";
-import { RegisterUserSchemaType } from "@/types/Schemas/auth.types";
+import {
+  LoginUserSchemaType,
+  RegisterUserSchemaType,
+} from "@/types/Schemas/auth.types";
 import { connectDB } from "@/utils/mongoose";
 import bcrypt from "bcryptjs";
 
@@ -47,3 +50,6 @@ export async function register({
     }
   }
 }
+
+//aplicar login
+export async function Login({ email, password }: LoginUserSchemaType) {}

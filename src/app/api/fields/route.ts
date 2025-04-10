@@ -8,6 +8,7 @@ export async function GET() {
   return NextResponse.json(fields);
 }
 
+//todo migrar a action
 export async function POST(request: Request) {
   try {
     await connectDB();
