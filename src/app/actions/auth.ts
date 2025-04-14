@@ -50,6 +50,3 @@ export async function register({
     }
   }
 }
-
-//aplicar login
-export async function Login({ email, password }: LoginUserSchemaType) {}

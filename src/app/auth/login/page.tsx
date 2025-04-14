@@ -13,7 +13,7 @@ import {
   LoginUserSchema,
   LoginUserSchemaType,
 } from "@/types/Schemas/auth.types";
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, LoaderCircle } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import {
@@ -24,11 +24,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, PasswordInput } from "@/components/ui/input";
 import Link from "next/link";
 import { REGISTER_ROUTE } from "@/utils/constants";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
+  const router = useRouter();
   const form = useForm<LoginUserSchemaType>({
     resolver: zodResolver(LoginUserSchema),
     defaultValues: {
@@ -46,7 +48,16 @@ function LoginPage() {
     }
   };
 
-  const onSubmit = () => {};
+  const onSubmit = async ({ password, email }: LoginUserSchemaType) => {
+    const res = await signIn("credentials", {
+      email,
+      password,
+    });
+
+    if (res?.ok) return router.push("/");
+  };
+
+  const { isSubmitting, isValid } = form.formState;
 
   return (
     <Card>
@@ -64,7 +75,7 @@ function LoginPage() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Input your email" {...field} />
+                    <Input placeholder="Ingresa tu correo" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,11 +86,10 @@ function LoginPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Passwod</FormLabel>
+                  <FormLabel>Contraseña</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Input your password"
+                    <PasswordInput
+                      placeholder="Ingresa tu contraseña"
                       {...field}
                     />
                   </FormControl>
@@ -88,16 +98,19 @@ function LoginPage() {
               )}
             />
             <div className="flex justify-center items-center">
-              <Button type="submit">Send</Button>
+              <Button type="submit" disabled={!isValid || isSubmitting}>
+                {isSubmitting && <LoaderCircle />}
+                Ingresar
+              </Button>
             </div>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="flex items-center justify-center">
         <p>
-          Tienes una cuenta?
+          No tienes una cuenta?
           <Button variant="link" asChild>
-            <Link href={REGISTER_ROUTE}>Ingrsesa aqui</Link>
+            <Link href={REGISTER_ROUTE}>Registrarse :D</Link>
           </Button>
         </p>
       </CardFooter>

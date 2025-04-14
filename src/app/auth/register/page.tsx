@@ -27,7 +27,7 @@ import {
 import { Input, PasswordInput } from "@/components/ui/input";
 import { register } from "@/app/actions/auth";
 import Link from "next/link";
-import { LOGIN_ROUTE, REGISTER_ROUTE } from "@/utils/constants";
+import { LOGIN_ROUTE } from "@/utils/constants";
 import { useRouter } from "next/navigation";
 
 function RegisterPage() {
@@ -128,7 +128,7 @@ function RegisterPage() {
             <div className="flex justify-center items-center">
               <Button type="submit" disabled={!isValid && isSubmitting}>
                 {isSubmitting && <LoaderCircle />}
-                Send
+                Registrar
               </Button>
             </div>
           </form>
@@ -138,7 +138,7 @@ function RegisterPage() {
         <p>
           Tienes una cuenta?
           <Button variant="link" asChild>
-            <Link href={REGISTER_ROUTE}>Ingrsesa aqui</Link>
+            <Link href={LOGIN_ROUTE}>Ingresa aqui</Link>
           </Button>
         </p>
       </CardFooter>

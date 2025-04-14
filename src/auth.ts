@@ -13,16 +13,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       name: "Credentials",
       id: "credentials",
       credentials: {
-        email: { label: "Email" },
-        password: { label: "Password" },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         await connectDB();
-        const userFound = await User.findOne({ email: credentials.email });
+
+        const userFound = await User.findOne({
+          email: credentials.email,
+        }).select("+password");
         if (!userFound) throw new Error("Invalid credentials");
 
         const isPasswordValid = await compare(
-          credentials.password as string,
+          credentials!.password as string,
           userFound.password
         );
 
