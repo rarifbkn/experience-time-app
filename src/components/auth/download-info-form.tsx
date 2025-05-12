@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 
-function FormToLoginForm() {
+function DownloadInfoForm() {
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginUserSchema),
     defaultValues: {
@@ -35,19 +35,19 @@ function FormToLoginForm() {
           name="token"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ID</FormLabel>
+              <FormLabel>Token</FormLabel>
               <FormControl>
-                <Input placeholder="ID" {...field} />
+                <Input placeholder="Token" {...field} />
               </FormControl>
             </FormItem>
           )}
         />
         <Button type="submit" disabled={!isValid || isSubmitting}>
-          Ingresar al formulario
+          Descargar archivos
         </Button>
       </form>
     </Form>
   );
 }
 
-export default FormToLoginForm;
+export default DownloadInfoForm;

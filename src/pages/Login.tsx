@@ -1,4 +1,4 @@
-import DownloadFilesFromForm from "@/components/auth/download-files-from-form";
+import DownloadFilesFromForm from "@/components/auth/download-info-card";
 import LoginFormCard from "@/components/auth/login-form-card";
 import AuthLayout from "@/components/layout/authLayout";
 function Login() {
