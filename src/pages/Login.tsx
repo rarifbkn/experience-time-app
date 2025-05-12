@@ -1,6 +1,6 @@
+import DownloadFilesFromForm from "@/components/auth/download-files-from-form";
+import LoginFormCard from "@/components/auth/login-form-card";
 import AuthLayout from "@/components/layout/authLayout";
-import LoginUserForm from "@/components/auth/login-user-form";
-
 function Login() {
   return (
     <AuthLayout
@@ -9,7 +9,10 @@ function Login() {
       urlRedirect="/register"
       textRedirect="Registrarse"
     >
-      <LoginUserForm />
+      <div className="flex justify-between gap-4">
+        <LoginFormCard />
+        <DownloadFilesFromForm />
+      </div>
     </AuthLayout>
   );
 }

@@ -1,5 +1,4 @@
 import Login from "@/pages/Login";
-import Register from "@/pages/Register";
 import { Route, Switch } from "wouter";
 
 export const Routes = () => {
@@ -9,7 +8,6 @@ export const Routes = () => {
 
       {/* Auth routes */}
       <Route path="/login" component={() => <Login />} />
-      <Route path="/register" component={() => <Register />} />
 
       {/* error routes */}
       <Route path="*" component={() => <div>404: no such page</div>} />

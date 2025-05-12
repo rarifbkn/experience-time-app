@@ -26,24 +26,12 @@ function AuthLayout({
   textRedirect,
 }: AuthLayoutProps) {
   return (
-    <div>
-      <div className="flex items-center justify-end h-16 p-4">
+    <div className="flex flex-col h-screen">
+      <div className="flex items-center justify-end h-1/12 p-4">
         <ModeToggle />
       </div>
-      <div className="flex items-center justify-center h-screen">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle>{title}</CardTitle>
-            {subtitle && <CardDescription>{subtitle}</CardDescription>}
-          </CardHeader>
-          <CardContent>{children}</CardContent>
-          <CardFooter className="text-center">
-            <p>¿No tienes una cuenta?</p>
-            <Button asChild variant="link">
-              <Link href={urlRedirect}>{textRedirect}</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+      <div className="container flex items-center justify-center flex-1">
+        {children}
       </div>
     </div>
   );
