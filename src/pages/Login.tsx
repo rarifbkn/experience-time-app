@@ -1,6 +1,6 @@
 import DownloadFilesFromForm from "@/components/auth/download-info-card";
 import LoginFormCard from "@/components/auth/login-form-card";
-import AuthLayout from "@/components/layout/authLayout";
+import AuthLayout from "@/layout/authLayout";
 function Login() {
   return (
     <AuthLayout
