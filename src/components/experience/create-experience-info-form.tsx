@@ -50,6 +50,8 @@ function CreateExperienceForm() {
     console.log(data);
   };
 
+  const { isValid, isSubmitting } = form.formState;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -182,7 +184,9 @@ function CreateExperienceForm() {
           </div>
         </div>
 
-        <Button type="submit">Crear experiencia</Button>
+        <Button type="submit" disabled={!isValid || isSubmitting}>
+          {isSubmitting ? "Creando experiencia..." : "Crear experiencia"}
+        </Button>
       </form>
     </Form>
   );

@@ -4,7 +4,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import CreateExperienceForm from "@/components/experience/create-experience-form";
+import CreateExperienceForm from "@/components/experience/create-experience-info-form";
 
 function CreateExperienceCard() {
   return (
