@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogFooter,
 } from "@/components/ui/dialog";
+import EditFieldForm from "./edit-field-form";
 
 function EditAlert() {
   return (
@@ -26,6 +27,7 @@ function EditAlert() {
             ¿Estas seguro de editar este campo?
           </DialogDescription>
         </DialogHeader>
+        <EditFieldForm />
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancelar</Button>

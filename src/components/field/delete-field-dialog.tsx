@@ -1,3 +1,4 @@
+import { Trash } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -7,31 +8,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+} from "../ui/dialog";
+import { Button } from "../ui/button";
 import { toast } from "sonner";
+import useFieldsStore from "@/stores/useFieldsStore";
 
-interface DeleteAlertProps {
-  link: string;
+interface Props {
+  name: string;
 }
+function DeleteFieldDialog({ name }: Props) {
+  const { removeField } = useFieldsStore();
 
-function DeleteAlert({ link }: DeleteAlertProps) {
-  const handleDelete = async () => {
-    await fetch(link, {
-      method: "DELETE",
-    })
-      .then(() => {
-        toast.success("Campo eliminado");
-      })
-      .catch((error) => {
-        toast.error("Error al eliminar el campo", error);
-      })
-      .finally(() => {
-        console.log("Campo eliminado");
-      });
+  const handleDelete = () => {
+    removeField(name);
+    toast.success("Campo eliminado");
   };
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -61,4 +52,4 @@ function DeleteAlert({ link }: DeleteAlertProps) {
   );
 }
 
-export default DeleteAlert;
+export default DeleteFieldDialog;

@@ -8,14 +8,13 @@ import { Field } from "@/types/interfaces/Fields";
 import { Badge } from "@/components/ui/badge";
 import DeleteAlert from "@/components/common/delete-alert";
 import EditAlert from "@/components/field/edit-alert";
+import DeleteFieldDialog from "./delete-field-dialog";
 
 interface FieldSimpleCardProps {
   field: Field;
 }
 
 function FieldSimpleCard({ field }: FieldSimpleCardProps) {
-  const linkToDelete = `/fields/${field._id}`;
-
   return (
     <Card>
       <CardHeader className="flex justify-between">
@@ -26,8 +25,8 @@ function FieldSimpleCard({ field }: FieldSimpleCardProps) {
       </CardContent>
       <CardFooter className="flex justify-end">
         <div className="flex gap-2">
-          <DeleteAlert link={linkToDelete} />
-          <EditAlert />
+          <DeleteFieldDialog name={field.name} />
+          <EditAlert name={field.name} />
         </div>
       </CardFooter>
     </Card>

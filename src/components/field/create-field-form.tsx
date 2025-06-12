@@ -16,19 +16,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
+import useFieldsStore from "@/stores/useFieldsStore";
+import { toast } from "sonner";
+import CreateExperienceFieldForm from "../experience/create-experience-field-form";
 
-function CreateExperienceFieldForm() {
+function CreateFieldForm() {
   const form = useForm<CreateFieldFormSchemaType>({
     resolver: zodResolver(createFieldFormSchema),
     defaultValues: {
       name: "",
+      category: "",
     },
   });
 
   const { isValid, isSubmitting } = form.formState;
 
+  const { addFields } = useFieldsStore();
+
   const onSubmit = (data: CreateFieldFormSchemaType) => {
-    console.log(data);
+    addFields(data);
+    form.reset();
+    toast.success("Campo agregado exitosamente");
   };
 
   return (
@@ -48,6 +56,20 @@ function CreateExperienceFieldForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Categoria</FormLabel>
+              <FormControl>
+                <Input placeholder="Categoria" {...field} />
+              </FormControl>
+              <FormDescription>Categoria del campo</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit" disabled={!isValid || isSubmitting}>
           {isSubmitting ? (
             <LoaderCircle className="animate-spin mr-2 h-4 w-4" />
@@ -59,4 +81,4 @@ function CreateExperienceFieldForm() {
   );
 }
 
-export default CreateExperienceFieldForm;
+export default CreateFieldForm;

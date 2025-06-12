@@ -7,20 +7,24 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import CreateExperienceFieldForm from "@/components/experience/create-experience-field-form";
+import { Plus } from "lucide-react";
+import CreateFieldForm from "./create-field-form";
 
 function CreateFieldDialog() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant="outline">Agregar campo</Button>
+        <Button variant="outline">
+          <Plus />
+          Agregar campo
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Crear campo</DialogTitle>
-          <DialogDescription></DialogDescription>
+          <DialogDescription> Agrega un nuevo campo </DialogDescription>
         </DialogHeader>
-        <CreateExperienceFieldForm />
+        <CreateFieldForm />
       </DialogContent>
     </Dialog>
   );
