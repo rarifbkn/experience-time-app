@@ -5,6 +5,7 @@ import HomeLayout from "@/layout/app-home-layout";
 import { useEffect } from "react";
 import { fetchFields } from "@/services/field.services";
 import useFieldsStore from "@/stores/useFieldsStore";
+import PreviewTab from "@/components/preview-tab";
 
 function CreateExperience() {
   const { setFields } = useFieldsStore();
@@ -18,8 +19,8 @@ function CreateExperience() {
 
   return (
     <HomeLayout>
-      <div className="container flex flex-col justify-center items-center flex-1">
-        <Tabs defaultValue="info" className="w-max">
+      <div className="container flex flex-col justify-center items-center flex-1 p-4">
+        <Tabs defaultValue="info" className="w-full">
           <TabsList className="mt-4 gap-4 w-full">
             <TabsTrigger value="info">Informacion</TabsTrigger>
             <TabsTrigger value="fields">Campos</TabsTrigger>
@@ -32,7 +33,7 @@ function CreateExperience() {
             <CreateExperienceFieldCard />
           </TabsContent>
           <TabsContent value="preview">
-            <h1>Vista previa</h1>
+            <PreviewTab />
           </TabsContent>
         </Tabs>
       </div>

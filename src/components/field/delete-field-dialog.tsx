@@ -11,13 +11,13 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import useFieldsStore from "@/stores/useFieldsStore";
+import useExperienceFormStore from "@/stores/useExperienceForm";
 
 interface Props {
   name: string;
 }
 function DeleteFieldDialog({ name }: Props) {
-  const { removeField } = useFieldsStore();
+  const { removeField } = useExperienceFormStore();
 
   const handleDelete = () => {
     removeField(name);

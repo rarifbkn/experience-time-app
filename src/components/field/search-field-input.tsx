@@ -14,18 +14,23 @@ import { Field } from "@/types/interfaces/Fields";
 import useFieldsStore from "@/stores/useFieldsStore";
 import CreateFieldDialog from "./create-field-dialog";
 import { toast } from "sonner";
+import useExperienceFormStore from "@/stores/useExperienceForm";
 
 function SearchFieldInput() {
   const [open, setOpen] = useState(false);
 
-  const { fieldsAdded, fields, addFields } = useFieldsStore();
+  // field from backend
+  const { fields } = useFieldsStore();
+
+  // field from experience form
+  const { Fields, addField } = useExperienceFormStore();
 
   const handleSelectField = (field: Field) => {
-    if (fieldsAdded.includes(field)) {
+    if (Fields.includes(field)) {
       toast.warning("Campo ya agregado");
       return;
     }
-    addFields(field);
+    addField(field);
     setOpen(false);
     toast.success("Campo agregado");
   };

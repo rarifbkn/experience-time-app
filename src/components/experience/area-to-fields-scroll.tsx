@@ -1,13 +1,13 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import useFieldsStore from "@/stores/useFieldsStore";
 import FieldSimpleCard from "../field/field-simple-card";
+import useExperienceFormStore from "@/stores/useExperienceForm";
 
 function AreaToFieldsScroll() {
-  const { fieldsAdded } = useFieldsStore();
+  const { Fields } = useExperienceFormStore();
   return (
     <ScrollArea className="h-[calc(100vh-30rem)]">
       <div className="flex flex-col gap-4 m-4">
-        {fieldsAdded.map((field) => (
+        {Fields.map((field) => (
           <FieldSimpleCard key={field.name} field={field} />
         ))}
       </div>

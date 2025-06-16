@@ -16,9 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
-import useFieldsStore from "@/stores/useFieldsStore";
 import { toast } from "sonner";
-import CreateExperienceFieldForm from "../experience/create-experience-field-form";
+import useExperienceFormStore from "@/stores/useExperienceForm";
 
 function CreateFieldForm() {
   const form = useForm<CreateFieldFormSchemaType>({
@@ -31,10 +30,10 @@ function CreateFieldForm() {
 
   const { isValid, isSubmitting } = form.formState;
 
-  const { addFields } = useFieldsStore();
+  const { addField } = useExperienceFormStore();
 
   const onSubmit = (data: CreateFieldFormSchemaType) => {
-    addFields(data);
+    addField(data);
     form.reset();
     toast.success("Campo agregado exitosamente");
   };

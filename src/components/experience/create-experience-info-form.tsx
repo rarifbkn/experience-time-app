@@ -32,6 +32,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { HOURS_LIST, MINUTES_LIST } from "@/utils/constants";
+import useExperienceFormStore from "@/stores/useExperienceForm";
+import { toast } from "sonner";
 
 function CreateExperienceForm() {
   const form = useForm<CreateExperienceFormSchemaType>({
@@ -46,8 +48,10 @@ function CreateExperienceForm() {
     },
   });
 
+  const { setExperienceForm } = useExperienceFormStore();
   const onSubmit = (data: CreateExperienceFormSchemaType) => {
-    console.log(data);
+    setExperienceForm(data);
+    toast.success("Experiencia agregada exitosamente");
   };
 
   const { isValid, isSubmitting } = form.formState;
