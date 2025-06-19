@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { fetchFields } from "@/services/field.services";
 import useFieldsStore from "@/stores/useFieldsStore";
 import PreviewTab from "@/components/preview-tab";
+import useExperienceFormStore from "@/stores/useExperienceForm";
+import { ExperienceFormSteps } from "@/types/enums/ExperienceFormSteps";
 
 function CreateExperience() {
   const { setFields } = useFieldsStore();
+  const { tab, setTab } = useExperienceFormStore();
   useEffect(() => {
     const fetchFieldsByEffect = async () => {
       const fields = await fetchFields();
@@ -20,19 +23,29 @@ function CreateExperience() {
   return (
     <HomeLayout>
       <div className="container flex flex-col justify-center items-center flex-1 p-4">
-        <Tabs defaultValue="info" className="w-full">
+        <Tabs
+          value={tab}
+          onValueChange={(value: string) =>
+            setTab(value as ExperienceFormSteps)
+          }
+          className="w-full"
+        >
           <TabsList className="mt-4 gap-4 w-full">
-            <TabsTrigger value="info">Informacion</TabsTrigger>
-            <TabsTrigger value="fields">Campos</TabsTrigger>
-            <TabsTrigger value="preview">Vista previa</TabsTrigger>
+            <TabsTrigger value={ExperienceFormSteps.INFO}>
+              Informacion
+            </TabsTrigger>
+            <TabsTrigger value={ExperienceFormSteps.FIELDS}>Campos</TabsTrigger>
+            <TabsTrigger value={ExperienceFormSteps.PREVIEW}>
+              Vista previa
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="info">
+          <TabsContent value={ExperienceFormSteps.INFO}>
             <CreateExperienceCard />
           </TabsContent>
-          <TabsContent value="fields">
+          <TabsContent value={ExperienceFormSteps.FIELDS}>
             <CreateExperienceFieldCard />
           </TabsContent>
-          <TabsContent value="preview">
+          <TabsContent value={ExperienceFormSteps.PREVIEW}>
             <PreviewTab />
           </TabsContent>
         </Tabs>

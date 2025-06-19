@@ -34,27 +34,32 @@ import {
 import { HOURS_LIST, MINUTES_LIST } from "@/utils/constants";
 import useExperienceFormStore from "@/stores/useExperienceForm";
 import { toast } from "sonner";
+import { ExperienceFormSteps } from "@/types/enums/ExperienceFormSteps";
 
 function CreateExperienceForm() {
+  const { ExperienceForm } = useExperienceFormStore();
+  const { title, description, expireAt, expireHour, expireMinute, token } =
+    ExperienceForm;
+
   const form = useForm<CreateExperienceFormSchemaType>({
     resolver: zodResolver(CreateExperienceFormSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      expireAt: new Date(),
-      expireHour: "00",
-      expireMinute: "00",
-      token: crypto.randomUUID(),
+      title: title,
+      description: description,
+      expireAt: expireAt,
+      expireHour: expireHour,
+      expireMinute: expireMinute,
+      token: token,
     },
   });
 
-  const { setExperienceForm } = useExperienceFormStore();
+  const { setExperienceForm, setTab } = useExperienceFormStore();
   const onSubmit = (data: CreateExperienceFormSchemaType) => {
     setExperienceForm(data);
-    toast.success("Experiencia agregada exitosamente");
+    setTab(ExperienceFormSteps.FIELDS);
+    toast.success("Información agregada exitosamente");
   };
-
-  const { isValid, isSubmitting } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <Form {...form}>
@@ -188,9 +193,11 @@ function CreateExperienceForm() {
           </div>
         </div>
 
-        <Button type="submit" disabled={!isValid || isSubmitting}>
-          {isSubmitting ? "Creando experiencia..." : "Crear experiencia"}
-        </Button>
+        <div className="flex justify-end">
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Creando Campos..." : "Crear Campos"}
+          </Button>
+        </div>
       </form>
     </Form>
   );

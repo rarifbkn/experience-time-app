@@ -9,7 +9,7 @@ export const CreateExperienceFormSchema = z.object({
   expireAt: z.date(),
   expireHour: z.string().min(2, "La hora debe tener al menos 2 caracteres"),
   expireMinute: z.string().min(2, "El minuto debe tener al menos 2 caracteres"),
-  token: z.string().uuid({ message: "El token es requerido" }),
+  token: z.string().uuid({ message: "El token debe ser un uuid" }),
 });
 
 export type CreateExperienceFormSchemaType = z.infer<

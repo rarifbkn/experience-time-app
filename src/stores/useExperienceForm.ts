@@ -1,10 +1,14 @@
 import { CreateFieldDTO } from "@/types/dtos/field";
+import { ExperienceFormSteps } from "@/types/enums/ExperienceFormSteps";
 import { CreateExperienceFormSchemaType } from "@/types/Request/CreateExperienceForm";
 import { create } from "zustand";
+import { v4 as uuid } from "uuid";
 
 interface ExperienceFormState {
   ExperienceForm: CreateExperienceFormSchemaType;
   Fields: CreateFieldDTO[];
+  tab: ExperienceFormSteps;
+  setTab: (tab: ExperienceFormSteps) => void;
   setExperienceForm: (experienceForm: CreateExperienceFormSchemaType) => void;
   addField: (field: CreateFieldDTO) => void;
   removeField: (name: string) => void;
@@ -18,7 +22,7 @@ const useExperienceFormStore = create<ExperienceFormState>()((set) => ({
     expireAt: new Date(),
     expireHour: "00",
     expireMinute: "00",
-    token: "",
+    token: uuid(),
   },
   Fields: [
     {
@@ -46,6 +50,8 @@ const useExperienceFormStore = create<ExperienceFormState>()((set) => ({
       category: "Datos",
     },
   ],
+  tab: ExperienceFormSteps.INFO,
+  setTab: (tab: ExperienceFormSteps) => set({ tab }),
   setExperienceForm: (experienceForm: CreateExperienceFormSchemaType) =>
     set({ ExperienceForm: experienceForm }),
   addField: (field: CreateFieldDTO) =>

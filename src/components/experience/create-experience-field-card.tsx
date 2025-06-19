@@ -6,8 +6,12 @@ import {
 } from "@/components/ui/card";
 import AreaToFieldsScroll from "./area-to-fields-scroll";
 import SearchFieldInput from "@/components/field/search-field-input";
+import useExperienceFormStore from "@/stores/useExperienceForm";
+import { Button } from "../ui/button";
+import { ExperienceFormSteps } from "@/types/enums/ExperienceFormSteps";
 
 function CreateExperienceFieldCard() {
+  const { setTab } = useExperienceFormStore();
   return (
     <Card>
       <CardHeader>
@@ -17,7 +21,20 @@ function CreateExperienceFieldCard() {
         <SearchFieldInput />
         <AreaToFieldsScroll />
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter className="flex justify-between">
+        <Button
+          variant="outline"
+          onClick={() => setTab(ExperienceFormSteps.INFO)}
+        >
+          Atrás
+        </Button>
+        <Button
+          variant="default"
+          onClick={() => setTab(ExperienceFormSteps.PREVIEW)}
+        >
+          Siguiente
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

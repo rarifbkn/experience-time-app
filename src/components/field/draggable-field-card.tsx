@@ -1,7 +1,7 @@
 import { CreateFieldDTO } from "@/types/dtos/field";
 import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
 import { GripVertical } from "lucide-react";
-import { useDraggable } from "@dnd-kit/core";
+import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
@@ -9,11 +9,13 @@ interface Props {
 }
 function DraggableFieldCard({ field }: Props) {
   const { name, category } = field;
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: name,
-  });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: name,
+    });
   const style = {
-    transform: CSS.Translate.toString(transform),
+    transform: CSS.Transform.toString(transform),
+    transition,
   };
 
   return (
@@ -24,7 +26,7 @@ function DraggableFieldCard({ field }: Props) {
       {...listeners}
       style={style}
     >
-      <GripVertical />
+      <GripVertical className="hover:cursor-grab " />
       <CardContent className="flex flex-col gap-2">
         <CardTitle>{name}</CardTitle>
         <CardDescription>{category}</CardDescription>
