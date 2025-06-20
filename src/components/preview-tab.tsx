@@ -4,6 +4,9 @@ import DisplayFieldsScroll from "./field/display-fields-scroll";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 
 import PreviewDroppableArea from "./experience/preview-droppable-area";
+import { Button } from "./ui/button";
+import { createExperience } from "@/services/experience.services";
+import { createField } from "@/services/field.services";
 
 function PreviewTab() {
   const { ExperienceForm, Fields } = useExperienceFormStore();
@@ -11,6 +14,13 @@ function PreviewTab() {
 
   const handleDragEnd = (event) => {
     console.log("drag end");
+  };
+
+  const handleSave = async () => {
+    await createExperience(ExperienceForm);
+    Fields.forEach(async (field) => {
+      await createField(field);
+    });
   };
 
   return (
@@ -43,6 +53,9 @@ function PreviewTab() {
             <PreviewDroppableArea fields={Fields} />
           </div>
         </DndContext>
+      </div>
+      <div className="flex justify-end mt-4">
+        <Button onClick={handleSave}>Guardar</Button>
       </div>
     </div>
   );
