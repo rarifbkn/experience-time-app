@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
+import { ExperienceAuth } from "@/services/experience.services";
+import { useLocation } from "wouter";
 
 function FormToLoginForm() {
   const form = useForm<LoginSchemaType>({
@@ -22,9 +24,15 @@ function FormToLoginForm() {
 
   const { isValid, isSubmitting } = form.formState;
 
+  const [location, navigate] = useLocation();
+
   //logica del formulario
-  const onSubmit = (data: LoginSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: LoginSchemaType) => {
+    const response = await ExperienceAuth(data.token);
+    if (response) {
+      form.reset();
+      navigate(`/experience/${response._id}`);
+    }
   };
 
   return (
